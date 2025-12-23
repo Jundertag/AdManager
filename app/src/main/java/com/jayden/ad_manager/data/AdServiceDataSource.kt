@@ -18,14 +18,14 @@ class AdServiceDataSource(
 ) {
     private val adIdManager = AdIdManager.get(ctx)
 
-    suspend fun fetchAdId(): AdId = suspendCancellableCoroutine { cout ->
+    suspend fun fetchAdId(): AdId = suspendCancellableCoroutine { coroutine ->
         val adIdReceiver = object : OutcomeReceiver<AdId, Exception> {
             override fun onResult(result: AdId) {
-                if (cout.isActive) cout.resume(result)
+                if (coroutine.isActive) coroutine.resume(result)
             }
 
             override fun onError(error: Exception) {
-                if (cout.isActive) cout.resumeWithException(error)
+                if (coroutine.isActive) coroutine.resumeWithException(error)
             }
         }
         adIdManager.getAdId(ctx.mainExecutor, adIdReceiver)
