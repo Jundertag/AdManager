@@ -5,14 +5,8 @@ import android.adservices.appsetid.AppSetId
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jayden.ad_manager.repo.AdServiceRepo
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.mapLatest
-import kotlinx.coroutines.flow.onSubscription
-import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 class MainViewModel(
@@ -32,7 +26,11 @@ class MainViewModel(
 
     fun refreshAppId() {
         viewModelScope.launch {
-            _appSetId.value = repo.getAppSetId()
+            try {
+                _appSetId.value = repo.getAppSetId()
+            } catch (_: RuntimeException) {
+                _appSetId.value = null
+            }
         }
     }
 }

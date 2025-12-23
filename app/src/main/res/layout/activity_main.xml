@@ -25,12 +25,20 @@
         app:layout_constraintStart_toStartOf="parent"/>
 
     <TextView
-        android:id="@+id/ad_tracking_value"
+        android:id="@+id/ad_limited_tracking_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_normal_size"
+        app:layout_constraintTop_toBottomOf="@id/ad_value"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/ad_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/ad_id_limited_true"
         android:textSize="@dimen/text_normal_size"
-        app:layout_constraintTop_toBottomOf="@id/ad_value"
+        app:layout_constraintTop_toBottomOf="@id/ad_limited_tracking_value"
         app:layout_constraintStart_toStartOf="parent"/>
 
     <TextView
@@ -41,7 +49,7 @@
         android:text="AppSetID:"
         android:textSize="@dimen/text_bold_size"
         android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/ad_tracking_value"
+        app:layout_constraintTop_toBottomOf="@id/ad_description"
         app:layout_constraintStart_toStartOf="parent"/>
 
     <TextView
@@ -60,6 +68,14 @@
         android:text="loading..."
         android:textSize="@dimen/text_normal_size"
         app:layout_constraintTop_toBottomOf="@id/app_set_id_value"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/app_set_id_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_normal_size"
+        app:layout_constraintTop_toBottomOf="@id/app_set_id_scope"
         app:layout_constraintStart_toStartOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

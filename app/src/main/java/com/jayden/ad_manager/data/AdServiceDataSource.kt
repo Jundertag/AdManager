@@ -37,11 +37,11 @@ class AdServiceDataSource(
     suspend fun fetchAppSetId(): AppSetId = suspendCancellableCoroutine { continuation ->
         val appSetIdReceiver = object : OutcomeReceiver<AppSetId, Exception> {
             override fun onResult(result: AppSetId) {
-                continuation.resume(result)
+                if (continuation.isActive) continuation.resume(result)
             }
 
             override fun onError(error: Exception) {
-                continuation.resumeWithException(error)
+                if (continuation.isActive) continuation.resumeWithException(error)
             }
         }
         appSetIdManager.getAppSetId(ctx.mainExecutor, appSetIdReceiver)

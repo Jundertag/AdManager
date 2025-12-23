@@ -1,6 +1,7 @@
 package com.jayden.ad_manager.app.ui
 
 import android.adservices.adid.AdId
+import android.adservices.appsetid.AppSetId
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -49,15 +50,38 @@ class MainActivity : AppCompatActivity() {
                 viewModel.refreshAdId()
                 viewModel.adId.collect { adId ->
                     if (adId == null) {
-                        binding.adValue.text = "collecting..."
-                        binding.adTrackingValue.text = "collecting..."
+                        binding.adValue.text = "<unavailable>"
+                        binding.adLimitedTrackingValue.text = "<unavailable>"
                     } else {
-                        binding.adValue.text = adId.adId
-                        binding.adTrackingValue.text = if (adId.isLimitAdTrackingEnabled) {
+                        binding.adValue.text = "adId: ${adId.adId}"
+                        binding.adLimitedTrackingValue.text = "isLimitedAdTrackingEnabled: ${adId.isLimitAdTrackingEnabled}"
+                        binding.adDescription.text = if (adId.isLimitAdTrackingEnabled) {
                             resources.getString(R.string.ad_id_limited_true)
                         } else {
                             resources.getString(R.string.ad_id_limited_false)
                         }
+                    }
+                }
+            }
+        }
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.refreshAppId()
+                viewModel.appSetId.collect { appSetId ->
+                    if (appSetId == null) {
+                        binding.appSetIdValue.text = "<unavailable>"
+                        binding.appSetIdScope.text = "<unavailable>"
+                    } else {
+                        binding.appSetIdValue.text = "id: ${appSetId.id}"
+                        binding.appSetIdScope.text = if (appSetId.scope == AppSetId.SCOPE_APP) {
+                            "scope: SCOPE_APP = ${appSetId.scope}"
+                        } else if (appSetId.scope == AppSetId.SCOPE_DEVELOPER) {
+                            "scope: SCOPE_DEVELOPER = ${appSetId.scope}"
+                        } else {
+                            "<number-range-exceeded> scope = ${appSetId.scope}"
+                        }
+
                     }
                 }
             }
