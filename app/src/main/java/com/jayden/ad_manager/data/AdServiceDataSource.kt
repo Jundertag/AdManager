@@ -3,6 +3,8 @@ package com.jayden.ad_manager.data
 import android.adservices.AdServicesState
 import android.adservices.adid.AdId
 import android.adservices.adid.AdIdManager
+import android.adservices.appsetid.AppSetId
+import android.adservices.appsetid.AppSetIdManager
 import android.content.Context
 import android.os.OutcomeReceiver
 import kotlinx.coroutines.channels.awaitClose
@@ -17,19 +19,30 @@ class AdServiceDataSource(
     private val ctx: Context
 ) {
     private val adIdManager = AdIdManager.get(ctx)
+    private val appSetIdManager = AppSetIdManager.get(ctx)
 
-    suspend fun fetchAdId(): AdId = suspendCancellableCoroutine { coroutine ->
+    suspend fun fetchAdId(): AdId = suspendCancellableCoroutine { continuation ->
         val adIdReceiver = object : OutcomeReceiver<AdId, Exception> {
             override fun onResult(result: AdId) {
-                if (coroutine.isActive) coroutine.resume(result)
+                if (continuation.isActive) continuation.resume(result)
             }
 
             override fun onError(error: Exception) {
-                if (coroutine.isActive) coroutine.resumeWithException(error)
+                if (continuation.isActive) continuation.resumeWithException(error)
             }
         }
         adIdManager.getAdId(ctx.mainExecutor, adIdReceiver)
     }
 
+    suspend fun fetchAppSetId(): AppSetId = suspendCancellableCoroutine { continuation ->
+        val appSetIdReceiver = object : OutcomeReceiver<AppSetId, Exception> {
+            override fun onResult(result: AppSetId) {
+                continuation.resume(result)
+            }
 
+            override fun onError(error: Exception) {
+                continuation.resumeWithException(error)
+            }
+        }
+    }
 }
