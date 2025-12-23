@@ -3,7 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools">
     
     <uses-permission android:name="android.permission.ACCESS_ADSERVICES_AD_ID"/>
-    <uses-permission android:name="android.permission.ACCESS_ADSERVICES_APP_SET_ID"/>
+    <uses-permission android:name="android.permission.ACCESS_ADSERVICES_AD_SELECTION"/>
+    <uses-permission android:name="android.permission.ACCESS_ADSERVICES_ATTRIBUTION"/>
+    <uses-permission android:name="android.permission.ACCESS_ADSERVICES_CUSTOM_AUDIENCE"/>
+    <uses-permission android:name="android.permission.ACCESS_ADSERVICES_PROTECTED_SIGNALS"/>
+    <uses-permission android:name="android.permission.ACCESS_ADSERVICES_TOPICS"/>
 
     <application
         android:name=".app.MainApplication"

@@ -3,4 +3,8 @@
     <string name="ad_id_title">Advertisement ID:</string>
     <string name="ad_id_limited_true">You aren\'t traceable via your AdId</string>
     <string name="ad_id_limited_false">You are traceable via your AdId</string>
+    <string name="app_set_id_title">AppSetID:</string>
+    <string name="app_set_id_scope_dev">SCOPE_DEVELOPER means appSetId is scoped to the developer of the app and cannot identify a single user.</string>
+    <string name="app_set_id_scope_app">SCOPE_APP means appSetId is scoped to the app and can identify a single user.</string>
+    <string name="app_set_id_unusable">AppSetIdManager is unavailable and cannot be used for identification</string>
 </resources>

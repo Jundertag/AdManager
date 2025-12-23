@@ -72,6 +72,7 @@ class MainActivity : AppCompatActivity() {
                     if (appSetId == null) {
                         binding.appSetIdValue.text = "<unavailable>"
                         binding.appSetIdScope.text = "<unavailable>"
+                        binding.appSetIdDescription.text = resources.getString(R.string.app_set_id_unusable)
                     } else {
                         binding.appSetIdValue.text = "id: ${appSetId.id}"
                         binding.appSetIdScope.text = if (appSetId.scope == AppSetId.SCOPE_APP) {
@@ -81,7 +82,13 @@ class MainActivity : AppCompatActivity() {
                         } else {
                             "<number-range-exceeded> scope = ${appSetId.scope}"
                         }
-
+                        binding.appSetIdDescription.text = if (appSetId.scope == AppSetId.SCOPE_APP) {
+                            resources.getString(R.string.app_set_id_scope_app)
+                        } else if (appSetId.scope == AppSetId.SCOPE_DEVELOPER) {
+                            resources.getString(R.string.app_set_id_scope_dev)
+                        } else {
+                            "<number-range-exceeded>"
+                        }
                     }
                 }
             }
