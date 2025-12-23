@@ -11,4 +11,5 @@ class AdServiceRepo(
     private val dataSource: AdServiceDataSource
 ) {
     suspend fun getAdId() = dataSource.fetchAdId()
+    suspend fun getAppSetId() = dataSource.fetchAppSetId()
 }
