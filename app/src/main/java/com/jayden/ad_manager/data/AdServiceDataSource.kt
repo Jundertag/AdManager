@@ -44,5 +44,6 @@ class AdServiceDataSource(
                 continuation.resumeWithException(error)
             }
         }
+        appSetIdManager.getAppSetId(ctx.mainExecutor, appSetIdReceiver)
     }
 }
