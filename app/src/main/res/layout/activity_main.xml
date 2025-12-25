@@ -9,7 +9,7 @@
         android:id="@+id/ad_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Advertisement ID:"
+        android:text="AdId:"
         android:textSize="@dimen/text_bold_size"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent"
@@ -46,7 +46,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="AppSetID:"
+        android:text="AppSetId:"
         android:textSize="@dimen/text_bold_size"
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/ad_description"
@@ -76,6 +76,25 @@
         android:layout_height="wrap_content"
         android:textSize="@dimen/text_normal_size"
         app:layout_constraintTop_toBottomOf="@id/app_set_id_scope"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/measurement_api_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="MeasurementManager:"
+        android:textSize="@dimen/text_bold_size"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/app_set_id_description"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/measurement_api_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_normal_size"
+        app:layout_constraintTop_toBottomOf="@id/measurement_api_title"
         app:layout_constraintStart_toStartOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

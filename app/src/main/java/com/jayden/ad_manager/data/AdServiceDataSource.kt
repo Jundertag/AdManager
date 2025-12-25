@@ -5,6 +5,7 @@ import android.adservices.adid.AdId
 import android.adservices.adid.AdIdManager
 import android.adservices.appsetid.AppSetId
 import android.adservices.appsetid.AppSetIdManager
+import android.adservices.measurement.MeasurementManager
 import android.content.Context
 import android.os.OutcomeReceiver
 import kotlinx.coroutines.channels.awaitClose
@@ -20,6 +21,7 @@ class AdServiceDataSource(
 ) {
     private val adIdManager = AdIdManager.get(ctx)
     private val appSetIdManager = AppSetIdManager.get(ctx)
+    private val measurementManager = MeasurementManager.get(ctx)
 
     suspend fun fetchAdId(): AdId = suspendCancellableCoroutine { continuation ->
         val adIdReceiver = object : OutcomeReceiver<AdId, Exception> {
@@ -45,5 +47,18 @@ class AdServiceDataSource(
             }
         }
         appSetIdManager.getAppSetId(ctx.mainExecutor, appSetIdReceiver)
+    }
+
+    suspend fun fetchMeasurementManagerApiStatus(): Int = suspendCancellableCoroutine { continuation ->
+        val measurementApiStatusReceiver = object : OutcomeReceiver<Int, Exception> {
+            override fun onResult(result: Int) {
+                if (continuation.isActive) continuation.resume(result)
+            }
+
+            override fun onError(error: Exception) {
+                if (continuation.isActive) continuation.resumeWithException(error)
+            }
+        }
+        measurementManager.getMeasurementApiStatus(ctx.mainExecutor, measurementApiStatusReceiver)
     }
 }

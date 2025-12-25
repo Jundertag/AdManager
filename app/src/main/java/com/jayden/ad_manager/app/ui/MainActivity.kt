@@ -70,8 +70,8 @@ class MainActivity : AppCompatActivity() {
                 viewModel.refreshAppId()
                 viewModel.appSetId.collect { appSetId ->
                     if (appSetId == null) {
-                        binding.appSetIdValue.text = "<unavailable>"
-                        binding.appSetIdScope.text = "<unavailable>"
+                        binding.appSetIdValue.text = resources.getString(R.string.app_set_id_unavailable)
+                        binding.appSetIdScope.text = resources.getString(R.string.app_set_id_unavailable)
                         binding.appSetIdDescription.text = resources.getString(R.string.app_set_id_unusable)
                     } else {
                         binding.appSetIdValue.text = "id: ${appSetId.id}"
@@ -89,6 +89,19 @@ class MainActivity : AppCompatActivity() {
                         } else {
                             "<number-range-exceeded>"
                         }
+                    }
+                }
+            }
+        }
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.refreshMeasurementApiStatus()
+                viewModel.measurementApiStatus.collect { status ->
+                    binding.measurementApiStatus.text = when (status) {
+                        true -> "MEASUREMENT_API_STATUS_ENABLED"
+                        false -> "MEASUREMENT_API_STATUS_DISABLED"
+                        null -> "<unavailable>"
                     }
                 }
             }

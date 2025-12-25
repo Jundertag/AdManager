@@ -2,6 +2,7 @@ package com.jayden.ad_manager.app.viewmodel
 
 import android.adservices.adid.AdId
 import android.adservices.appsetid.AppSetId
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jayden.ad_manager.repo.AdServiceRepo
@@ -18,6 +19,9 @@ class MainViewModel(
     private val _appSetId = MutableStateFlow<AppSetId?>(null)
     val appSetId = _appSetId.asStateFlow()
 
+    private val _measurementApiStatus = MutableStateFlow<Boolean?>(null)
+    val measurementApiStatus = _measurementApiStatus.asStateFlow()
+
     fun refreshAdId() {
         viewModelScope.launch {
             _adId.value = repo.getAdId()
@@ -28,9 +32,20 @@ class MainViewModel(
         viewModelScope.launch {
             try {
                 _appSetId.value = repo.getAppSetId()
-            } catch (_: RuntimeException) {
+            } catch (e: RuntimeException) {
+                Log.w(TAG, "Received RuntimeException Error", e)
                 _appSetId.value = null
             }
         }
+    }
+
+    fun refreshMeasurementApiStatus() {
+        viewModelScope.launch {
+            _measurementApiStatus.value = repo.getMeasurementApiStatus()
+        }
+    }
+
+    companion object {
+        private const val TAG = "MainViewModel"
     }
 }
