@@ -2,6 +2,7 @@ package com.jayden.ad_manager.app.ui
 
 import android.adservices.adid.AdId
 import android.adservices.appsetid.AppSetId
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -30,6 +31,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         Log.i(TAG, "onCreate()")
         super.onCreate(savedInstanceState)
@@ -50,8 +52,8 @@ class MainActivity : AppCompatActivity() {
                 viewModel.refreshAdId()
                 viewModel.adId.collect { adId ->
                     if (adId == null) {
-                        binding.adValue.text = "<unavailable>"
-                        binding.adLimitedTrackingValue.text = "<unavailable>"
+                        binding.adValue.text = resources.getString(R.string.ad_id_unavailable)
+                        binding.adLimitedTrackingValue.text = resources.getString(R.string.ad_id_unavailable)
                     } else {
                         binding.adValue.text = "adId: ${adId.adId}"
                         binding.adLimitedTrackingValue.text = "isLimitedAdTrackingEnabled: ${adId.isLimitAdTrackingEnabled}"
@@ -99,8 +101,8 @@ class MainActivity : AppCompatActivity() {
                 viewModel.refreshMeasurementApiStatus()
                 viewModel.measurementApiStatus.collect { status ->
                     binding.measurementApiStatus.text = when (status) {
-                        true -> "MEASUREMENT_API_STATUS_ENABLED"
-                        false -> "MEASUREMENT_API_STATUS_DISABLED"
+                        true -> "measurementApiStatus: MEASUREMENT_API_STATUS_ENABLED"
+                        false -> "measurementApiStatus: MEASUREMENT_API_STATUS_DISABLED"
                         null -> "<unavailable>"
                     }
                 }

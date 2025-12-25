@@ -6,6 +6,10 @@ import android.adservices.adid.AdIdManager
 import android.adservices.appsetid.AppSetId
 import android.adservices.appsetid.AppSetIdManager
 import android.adservices.measurement.MeasurementManager
+import android.adservices.topics.GetTopicsRequest
+import android.adservices.topics.GetTopicsResponse
+import android.adservices.topics.Topic
+import android.adservices.topics.TopicsManager
 import android.content.Context
 import android.os.OutcomeReceiver
 import kotlinx.coroutines.channels.awaitClose
@@ -22,6 +26,7 @@ class AdServiceDataSource(
     private val adIdManager = AdIdManager.get(ctx)
     private val appSetIdManager = AppSetIdManager.get(ctx)
     private val measurementManager = MeasurementManager.get(ctx)
+    private val topicsManager = TopicsManager.get(ctx)
 
     suspend fun fetchAdId(): AdId = suspendCancellableCoroutine { continuation ->
         val adIdReceiver = object : OutcomeReceiver<AdId, Exception> {
@@ -60,5 +65,23 @@ class AdServiceDataSource(
             }
         }
         measurementManager.getMeasurementApiStatus(ctx.mainExecutor, measurementApiStatusReceiver)
+    }
+
+    suspend fun fetchTopics(): List<Topic> = suspendCancellableCoroutine { continuation ->
+        val topicResponseReceiver = object : OutcomeReceiver<GetTopicsResponse, Exception> {
+            override fun onResult(result: GetTopicsResponse) {
+                val topics = result.topics
+                if (continuation.isActive) continuation.resume(topics)
+            }
+
+            override fun onError(error: Exception) {
+                if (continuation.isActive) continuation.resumeWithException(error)
+            }
+        }
+        val topicRequest = GetTopicsRequest.Builder()
+            .setShouldRecordObservation(false)
+            .build()
+
+        topicsManager.getTopics(topicRequest, ctx.mainExecutor, topicResponseReceiver)
     }
 }
