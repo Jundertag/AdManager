@@ -1,6 +1,5 @@
 package com.jayden.ad_manager.app.ui
 
-import android.adservices.adid.AdId
 import android.adservices.appsetid.AppSetId
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -9,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.marginTop
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -26,10 +24,6 @@ class MainActivity : AppCompatActivity() {
     private val viewModel: MainViewModel by viewModels(
         factoryProducer = { (application as MainApplication).appGraph.viewModelProvider }
     )
-
-    private val adIdOnClickListener = View.OnClickListener {
-
-    }
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {

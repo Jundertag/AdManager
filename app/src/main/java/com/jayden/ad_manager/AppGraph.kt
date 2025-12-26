@@ -6,7 +6,7 @@ import com.jayden.ad_manager.data.AdServiceDataSource
 import com.jayden.ad_manager.repo.AdServiceRepo
 
 class AppGraph(
-    private val appContext: Context
+    appContext: Context
 ) {
     val adServiceDataSource = AdServiceDataSource(appContext)
     val adServiceRepo = AdServiceRepo(adServiceDataSource)

@@ -1,6 +1,5 @@
 package com.jayden.ad_manager.data
 
-import android.adservices.AdServicesState
 import android.adservices.adid.AdId
 import android.adservices.adid.AdIdManager
 import android.adservices.appsetid.AppSetId
@@ -12,10 +11,6 @@ import android.adservices.topics.Topic
 import android.adservices.topics.TopicsManager
 import android.content.Context
 import android.os.OutcomeReceiver
-import kotlinx.coroutines.channels.awaitClose
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.callbackFlow
-import kotlinx.coroutines.flow.cancellable
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException

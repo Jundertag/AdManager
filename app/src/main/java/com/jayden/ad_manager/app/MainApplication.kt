@@ -6,6 +6,7 @@ import com.jayden.ad_manager.AppGraph
 class MainApplication : Application() {
     lateinit var appGraph: AppGraph
     override fun onCreate() {
+        super.onCreate()
         appGraph = AppGraph(applicationContext)
     }
 }
