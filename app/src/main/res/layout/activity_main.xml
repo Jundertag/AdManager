@@ -3,7 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="?attr/backgroundColor">
 
     <TextView
         android:id="@+id/ad_title"
@@ -35,6 +36,7 @@
         android:paddingHorizontal="@dimen/text_padding_horizontal"
         android:text="loading..."
         android:textSize="@dimen/text_normal_size"
+        android:textColor="?attr/colorOnSurfaceVariant"
         app:layout_constraintTop_toBottomOf="@id/ad_value"
         app:layout_constraintStart_toStartOf="parent"/>
 
@@ -45,6 +47,7 @@
         android:paddingHorizontal="@dimen/text_padding_horizontal"
         android:text="@string/ad_id_limited_true"
         android:textSize="@dimen/text_normal_size"
+        android:textColor="?attr/colorOnSurfaceVariant"
         app:layout_constraintTop_toBottomOf="@id/ad_limited_tracking_value"
         app:layout_constraintStart_toStartOf="parent"/>
 
@@ -57,6 +60,7 @@
         android:text="AppSetId:"
         android:textSize="@dimen/text_bold_size"
         android:textStyle="bold"
+        android:textColor="?attr/colorOnSurface"
         app:layout_constraintTop_toBottomOf="@id/ad_description"
         app:layout_constraintStart_toStartOf="parent"/>
 
@@ -67,6 +71,7 @@
         android:paddingHorizontal="@dimen/text_padding_horizontal"
         android:text="loading..."
         android:textSize="@dimen/text_normal_size"
+        android:textColor="?attr/colorOnSurfaceVariant"
         app:layout_constraintTop_toBottomOf="@id/app_set_id_title"
         app:layout_constraintStart_toStartOf="parent"/>
 
@@ -77,6 +82,7 @@
         android:paddingHorizontal="@dimen/text_padding_horizontal"
         android:text="loading..."
         android:textSize="@dimen/text_normal_size"
+        android:textColor="?attr/colorOnSurfaceVariant"
         app:layout_constraintTop_toBottomOf="@id/app_set_id_value"
         app:layout_constraintStart_toStartOf="parent"/>
 
@@ -86,6 +92,7 @@
         android:layout_height="wrap_content"
         android:paddingHorizontal="@dimen/text_padding_horizontal"
         android:textSize="@dimen/text_normal_size"
+        android:textColor="?attr/colorOnSurfaceVariant"
         app:layout_constraintTop_toBottomOf="@id/app_set_id_scope"
         app:layout_constraintStart_toStartOf="parent"/>
 
@@ -98,6 +105,7 @@
         android:text="MeasurementManager:"
         android:textSize="@dimen/text_bold_size"
         android:textStyle="bold"
+        android:textColor="?attr/colorOnSurface"
         app:layout_constraintTop_toBottomOf="@id/app_set_id_description"
         app:layout_constraintStart_toStartOf="parent"/>
 
@@ -107,6 +115,7 @@
         android:layout_height="wrap_content"
         android:paddingHorizontal="@dimen/text_padding_horizontal"
         android:textSize="@dimen/text_normal_size"
+        android:textColor="?attr/colorOnSurfaceVariant"
         app:layout_constraintTop_toBottomOf="@id/measurement_api_title"
         app:layout_constraintStart_toStartOf="parent"/>
 
@@ -117,6 +126,7 @@
         android:paddingHorizontal="@dimen/text_padding_horizontal"
         android:text="@string/measurement_api_description"
         android:textSize="@dimen/text_normal_size"
+        android:textColor="?attr/colorOnSurfaceVariant"
         app:layout_constraintTop_toBottomOf="@id/measurement_api_status"
         app:layout_constraintStart_toStartOf="parent"/>
 

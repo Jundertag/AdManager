@@ -13,8 +13,10 @@
         <item name="colorSurface">@color/surface_dark</item>
         <item name="colorOnSurface">@color/on_surface_dark</item>
         <item name="colorOnSurfaceVariant">@color/on_surface_variant_dark</item>
+        <!-- Background brand color. -->
+        <item name="backgroundColor">@color/background_dark</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
-        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightStatusBar">false</item>
     </style>
 </resources>
