@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="text_bold_size">20sp</dimen>
-    <dimen name="text_normal_size">16sp</dimen>
+    <dimen name="text_bold_size">19sp</dimen>
+    <dimen name="text_normal_size">15sp</dimen>
+    <dimen name="text_padding_horizontal">6dp</dimen>
 </resources>

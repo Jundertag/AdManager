@@ -32,15 +32,6 @@ class MainActivity : AppCompatActivity() {
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.adTitle.apply {
-            post {
-                val cutoutTopInset = windowManager.currentWindowMetrics.windowInsets.displayCutout?.safeInsetTop ?: 0
-                Log.v(TAG, "inset top is $cutoutTopInset")
-                (layoutParams as ViewGroup.MarginLayoutParams).setMargins(0, cutoutTopInset, 0, 0)
-                Log.d(TAG, "set margins to { left = 0, top = $cutoutTopInset, right = 0, bottom = 0 }")
-            }
-        }
-
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.refreshAdId()
@@ -95,12 +86,25 @@ class MainActivity : AppCompatActivity() {
                 viewModel.refreshMeasurementApiStatus()
                 viewModel.measurementApiStatus.collect { status ->
                     binding.measurementApiStatus.text = when (status) {
-                        true -> "measurementApiStatus: MEASUREMENT_API_STATUS_ENABLED"
-                        false -> "measurementApiStatus: MEASUREMENT_API_STATUS_DISABLED"
+                        true -> "measurementApiStatus: MEASUREMENT_API_STATUS_ENABLED = 1"
+                        false -> "measurementApiStatus: MEASUREMENT_API_STATUS_DISABLED = 0"
                         null -> "<unavailable>"
                     }
                 }
             }
+        }
+
+        binding.adTitle.post {
+            val cutoutTopInset =
+                windowManager.currentWindowMetrics.windowInsets.displayCutout?.safeInsetTop ?: 0
+            Log.v(TAG, "inset top is $cutoutTopInset")
+            (binding.adTitle.layoutParams as ViewGroup.MarginLayoutParams).setMargins(
+                0,
+                cutoutTopInset,
+                0,
+                0
+            )
+            Log.d(TAG, "set margins to { left = 0, top = $cutoutTopInset, right = 0, bottom = 0 }")
         }
     }
 

@@ -9,4 +9,5 @@
     <string name="app_set_id_unavailable">&lt;unavailable&gt;</string>
     <string name="app_set_id_unusable">AppSetIdManager is unavailable and cannot be used for identification</string>
     <string name="ad_id_unavailable"><![CDATA[<unavailable>]]></string>
+    <string name="measurement_api_description">"MeasurementManager is used for ad performance tracking, registerSource function is used to let the OS know something useful happened (viewing an ad, clicking on a button). registerTrigger is to let the OS know something actually happened (user installed app, clicked on link, etc.). Functions registerWebSource and registerWebTrigger are used for web contexts."</string>
 </resources>
