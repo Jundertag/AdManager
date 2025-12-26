@@ -2,6 +2,7 @@ package com.jayden.ad_manager.app.ui
 
 import android.adservices.appsetid.AppSetId
 import android.annotation.SuppressLint
+import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
 import android.view.View
