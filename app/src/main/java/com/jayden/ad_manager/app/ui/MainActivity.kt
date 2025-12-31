@@ -6,6 +6,7 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.text.Html.fromHtml
 import android.text.SpannableStringBuilder
+import android.text.style.TypefaceSpan
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
@@ -40,6 +41,7 @@ class MainActivity : AppCompatActivity() {
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        TypefaceSpan("monospace")
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.refreshAdId()
@@ -49,8 +51,8 @@ class MainActivity : AppCompatActivity() {
                         binding.adValue.text = resources.getText(R.string.ad_id_unavailable)
                         binding.adLimitedTrackingValue.text = resources.getText(R.string.ad_id_unavailable)
                     } else {
-                        binding.adValue.text = "<tt>adId: ${adId.adId}</tt>"
-                        binding.adLimitedTrackingValue.text = "<tt>isLimitedAdTrackingEnabled: ${adId.isLimitAdTrackingEnabled}</tt>"
+                        binding.adValue.text = SpannableStringBuilder().append(resources.getText(R.string.ad_id_value)).append(adId.adId)
+                        binding.adLimitedTrackingValue.text = SpannableStringBuilder().append(resources.getText(R.string.ad_id_tracking_limited_value)).append(adId.isLimitAdTrackingEnabled.toString())
                         binding.adDescription.text = if (adId.isLimitAdTrackingEnabled) {
                             resources.getText(R.string.ad_id_limited_true)
                         } else {

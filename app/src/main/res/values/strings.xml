@@ -1,8 +1,11 @@
 <resources>
     <string name="app_name">Ad Manager</string>
     <string name="ad_id_title">Advertisement ID:</string>
+    <string name="ad_id_value"><tt>adId: </tt></string>
+    <string name="ad_id_tracking_limited_value"><tt>isLimitedAdTrackingEnabled: </tt></string>
     <string name="ad_id_limited_true">You aren\'t traceable via your AdId</string>
     <string name="ad_id_limited_false">You are traceable via your AdId</string>
+    <string name="ad_id_unavailable"><tt>unavailable</tt></string>
     <string name="app_set_id_title">AppSetID:</string>
     <string name="app_set_id_value"><tt>id: %1$s!</tt></string>
     <string name="app_set_id_scope_dev"><tt>SCOPE_DEVELOPER = 2</tt></string>
@@ -12,6 +15,5 @@
     <string name="app_set_id_scope_value">scope = %1$d!</string>
     <string name="app_set_id_unavailable"><tt>unavailable</tt></string>
     <string name="app_set_id_unusable"><tt>AppSetIdManager</tt> is unavailable and cannot be used for identification</string>
-    <string name="ad_id_unavailable"><tt>unavailable</tt></string>
     <string name="measurement_api_description"><tt>MeasurementManager</tt> is used for ad performance tracking, <tt>registerSource</tt> function is used to let the OS know something useful happened (viewing an ad, clicking on a button). <tt>registerTrigger</tt> is to let the OS know something actually happened (user installed app, clicked on link, etc.). Functions <tt>registerWebSource</tt> and <tt>registerWebTrigger</tt> are used for web contexts.</string>
 </resources>
