@@ -11,6 +11,7 @@ import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.HtmlCompat
 import androidx.core.text.toSpannable
@@ -33,6 +34,33 @@ class MainActivity : AppCompatActivity() {
         factoryProducer = { (application as MainApplication).appGraph.viewModelProvider }
     )
 
+    private val viewClickListener = View.OnClickListener { v ->
+        val alertDialog = AlertDialog.Builder(this)
+        when (v.id) {
+            R.id.ad_title -> {
+                alertDialog
+                    .setTitle("AdId")
+                    .setMessage(resources.getText(R.string.ad_id_description))
+                    .setPositiveButton("OK", null)
+                    .show()
+            }
+            R.id.app_set_id_title -> {
+                alertDialog
+                    .setTitle("AppSetId")
+                    .setMessage(resources.getText(R.string.app_set_id_description))
+                    .setPositiveButton("OK", null)
+                    .show()
+            }
+            R.id.measurement_api_title -> {
+                alertDialog
+                    .setTitle("MeasurementManager")
+                    .setMessage(resources.getText(R.string.measurement_api_description))
+                    .setPositiveButton("OK", null)
+                    .show()
+            }
+        }
+    }
+
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         Log.i(TAG, "onCreate()")
@@ -41,15 +69,14 @@ class MainActivity : AppCompatActivity() {
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        TypefaceSpan("monospace")
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.refreshAdId()
                 viewModel.adId.collect { adId ->
                     if (adId == null) {
                         //binding.adValue.text = resources.getText(R.string.ad_id_unavailable)
-                        binding.adValue.text = resources.getText(R.string.ad_id_unavailable)
-                        binding.adLimitedTrackingValue.text = resources.getText(R.string.ad_id_unavailable)
+                        binding.adValue.text = resources.getText(R.string.unavailable)
+                        binding.adLimitedTrackingValue.text = resources.getText(R.string.unavailable)
                     } else {
                         binding.adValue.text = SpannableStringBuilder().append(resources.getText(R.string.ad_id_value)).append(adId.adId)
                         binding.adLimitedTrackingValue.text = SpannableStringBuilder().append(resources.getText(R.string.ad_id_tracking_limited_value)).append(adId.isLimitAdTrackingEnabled.toString())
@@ -68,8 +95,8 @@ class MainActivity : AppCompatActivity() {
                 viewModel.refreshAppId()
                 viewModel.appSetId.collect { appSetId ->
                     if (appSetId == null) {
-                        binding.appSetIdValue.text = resources.getText(R.string.app_set_id_unavailable)
-                        binding.appSetIdScope.text = resources.getText(R.string.app_set_id_unavailable)
+                        binding.appSetIdValue.text = resources.getText(R.string.unavailable)
+                        binding.appSetIdScope.text = resources.getText(R.string.unavailable)
                         binding.appSetIdDescription.text = resources.getText(R.string.app_set_id_unusable)
                     } else {
                         binding.appSetIdValue.text = resources.getText(R.string.app_set_id_value, appSetId.id)
@@ -93,14 +120,19 @@ class MainActivity : AppCompatActivity() {
                 viewModel.refreshMeasurementApiStatus()
                 viewModel.measurementApiStatus.collect { status ->
                     binding.measurementApiStatus.text = when (status) {
-                        true -> "measurementApiStatus: MEASUREMENT_API_STATUS_ENABLED = 1"
-                        false -> "measurementApiStatus: MEASUREMENT_API_STATUS_DISABLED = 0"
-                        null -> "<unavailable>"
+                        true -> resources.getText(R.string.measurement_api_status_enabled)
+                        false -> resources.getText(R.string.measurement_api_status_disabled)
+                        null -> resources.getText(R.string.unavailable)
                     }
                 }
             }
         }
 
+
+    }
+
+    override fun onStart() {
+        super.onStart()
         binding.adTitle.post {
             val cutoutTopInset =
                 windowManager.currentWindowMetrics.windowInsets.displayCutout?.safeInsetTop ?: 0
@@ -113,6 +145,10 @@ class MainActivity : AppCompatActivity() {
             )
             Log.d(TAG, "set margins to { left = 0, top = $cutoutTopInset, right = 0, bottom = 0 }")
         }
+
+        binding.adTitle.setOnClickListener(viewClickListener)
+        binding.appSetIdTitle.setOnClickListener(viewClickListener)
+        binding.measurementApiTitle.setOnClickListener(viewClickListener)
     }
 
     override fun onDestroy() {

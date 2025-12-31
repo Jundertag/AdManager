@@ -1,11 +1,11 @@
 <resources>
     <string name="app_name">Ad Manager</string>
-    <string name="ad_id_title">Advertisement ID:</string>
+    <string name="ad_id_title">AdId:</string>
     <string name="ad_id_value"><tt>adId: </tt></string>
     <string name="ad_id_tracking_limited_value"><tt>isLimitedAdTrackingEnabled: </tt></string>
     <string name="ad_id_limited_true">You aren\'t traceable via your AdId</string>
     <string name="ad_id_limited_false">You are traceable via your AdId</string>
-    <string name="ad_id_unavailable"><tt>unavailable</tt></string>
+    <string name="ad_id_description"><tt>AdId</tt> is a unique per device, per user, user resettable device identifier commonly used to track a particular user on a device for personalization. Benefits include user resettability, and <tt>ZERO_OUT</tt> ID, which usually stops ad networks from tracking you solely from Advertisement ID alone.</string>
     <string name="app_set_id_title">AppSetID:</string>
     <string name="app_set_id_value"><tt>id: %1$s!</tt></string>
     <string name="app_set_id_scope_dev"><tt>SCOPE_DEVELOPER = 2</tt></string>
@@ -13,7 +13,10 @@
     <string name="app_set_id_scope_dev_desc"><tt>SCOPE_DEVELOPER</tt> means <tt>appSetId</tt> is scoped to the developer of the app and cannot identify a single user.</string>
     <string name="app_set_id_scope_app_desc"><tt>SCOPE_APP</tt> means <tt>appSetId</tt> is scoped to the app and can identify a single user.</string>
     <string name="app_set_id_scope_value">scope = %1$d!</string>
-    <string name="app_set_id_unavailable"><tt>unavailable</tt></string>
     <string name="app_set_id_unusable"><tt>AppSetIdManager</tt> is unavailable and cannot be used for identification</string>
-    <string name="measurement_api_description"><tt>MeasurementManager</tt> is used for ad performance tracking, <tt>registerSource</tt> function is used to let the OS know something useful happened (viewing an ad, clicking on a button). <tt>registerTrigger</tt> is to let the OS know something actually happened (user installed app, clicked on link, etc.). Functions <tt>registerWebSource</tt> and <tt>registerWebTrigger</tt> are used for web contexts.</string>
+    <string name="app_set_id_description"><tt>AppSetId</tt> is a unique per device, per developer/user, \"user resettable\" identifier for non-advertisement purposes. Commonly used for analytics, spam detection, frequency capping, and fraud protection use cases. Scope can be one of <tt>SCOPE_APP</tt>, where it is unique to the application install itself, where it can identify a single user, note that it resets when an app is reinstalled. or <tt>SCOPE_DEVELOPER</tt>, which is unique to the developer\'s account, which means individual users cannot be identified, not even individual apps.</string>
+    <string name="measurement_api_status_disabled"><tt>measurementApiStatus: MEASUREMENT_API_STATUS_DISABLED = 0</tt></string>
+    <string name="measurement_api_status_enabled"><tt>measurementApiStatus: MEASUREMENT_API_STATUS_ENABLED = 1</tt></string>
+    <string name="measurement_api_description"><tt>MeasurementManager</tt> is used for advertisement attribution in a privacy respecting way. This is split into 2 event types: Source, and Trigger events.\nSource events are sent to the OS when an ad related event happened that later may deserve attribution, source events include ad views, clicks, impressions, etc.\nTrigger events are sent to the OS when a \"conversion\" happens, in other words, something meaningful happened that an advertiser would care about, examples include, but are not limited to: app install, first app open, account signup, login completion, purchase completion, subscribing to a subscription, add to cart, etc.\nThe OS receives events and links source events to trigger events, a believable link will trigger a future event to be sent to an attribution URL sent to the OS via these events. The future event will be delayed by days up to weeks.\nReports include Source related fields and Trigger related fields.\nSource fields include a source ID (limited to extremely small size, varies), source type (as an integer, many times a single digit), source app (package identifier or web url in web contexts), and includes ad tech identity.\nTrigger fields include conversion category (single digit, defined meaning), and trigger app name or web url.\nAggregate reports are aggregated information sourced by contributing devices, and usually include ad impressions, views, downloads, etc.</string>
+    <string name="unavailable"><tt>unavailable</tt></string>
 </resources>
