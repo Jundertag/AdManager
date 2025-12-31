@@ -4,11 +4,13 @@ import android.adservices.appsetid.AppSetId
 import android.annotation.SuppressLint
 import android.content.res.Configuration
 import android.os.Bundle
+import android.text.Html.fromHtml
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.text.HtmlCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -16,6 +18,7 @@ import com.jayden.ad_manager.R
 import com.jayden.ad_manager.app.MainApplication
 import com.jayden.ad_manager.app.viewmodel.MainViewModel
 import com.jayden.ad_manager.databinding.ActivityMainBinding
+import io.noties.markwon.Markwon
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
@@ -30,6 +33,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         Log.i(TAG, "onCreate()")
         super.onCreate(savedInstanceState)
+        //val markwon = Markwon.create(applicationContext)
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -38,15 +42,16 @@ class MainActivity : AppCompatActivity() {
                 viewModel.refreshAdId()
                 viewModel.adId.collect { adId ->
                     if (adId == null) {
-                        binding.adValue.text = resources.getString(R.string.ad_id_unavailable)
-                        binding.adLimitedTrackingValue.text = resources.getString(R.string.ad_id_unavailable)
+                        //binding.adValue.text = resources.getString(R.string.ad_id_unavailable)
+                        binding.adValue.text = HtmlCompat.fromHtml(resources.getString(R.string.ad_id_unavailable), HtmlCompat.FROM_HTML_MODE_LEGACY)
+                        binding.adLimitedTrackingValue.text = HtmlCompat.fromHtml(resources.getString(R.string.ad_id_unavailable), HtmlCompat.FROM_HTML_MODE_LEGACY)
                     } else {
                         binding.adValue.text = "adId: ${adId.adId}"
                         binding.adLimitedTrackingValue.text = "isLimitedAdTrackingEnabled: ${adId.isLimitAdTrackingEnabled}"
                         binding.adDescription.text = if (adId.isLimitAdTrackingEnabled) {
-                            resources.getString(R.string.ad_id_limited_true)
+                            HtmlCompat.fromHtml(resources.getString(R.string.ad_id_limited_true), HtmlCompat.FROM_HTML_MODE_LEGACY)
                         } else {
-                            resources.getString(R.string.ad_id_limited_false)
+                            HtmlCompat.fromHtml(resources.getString(R.string.ad_id_limited_false), HtmlCompat.FROM_HTML_MODE_LEGACY)
                         }
                     }
                 }
@@ -58,9 +63,9 @@ class MainActivity : AppCompatActivity() {
                 viewModel.refreshAppId()
                 viewModel.appSetId.collect { appSetId ->
                     if (appSetId == null) {
-                        binding.appSetIdValue.text = resources.getString(R.string.app_set_id_unavailable)
-                        binding.appSetIdScope.text = resources.getString(R.string.app_set_id_unavailable)
-                        binding.appSetIdDescription.text = resources.getString(R.string.app_set_id_unusable)
+                        binding.appSetIdValue.text = HtmlCompat.fromHtml(resources.getString(R.string.app_set_id_unavailable), HtmlCompat.FROM_HTML_MODE_LEGACY)
+                        binding.appSetIdScope.text = HtmlCompat.fromHtml(resources.getString(R.string.app_set_id_unavailable), HtmlCompat.FROM_HTML_MODE_LEGACY)
+                        binding.appSetIdDescription.text = HtmlCompat.fromHtml(resources.getString(R.string.app_set_id_unusable), HtmlCompat.FROM_HTML_MODE_LEGACY)
                     } else {
                         binding.appSetIdValue.text = "id: ${appSetId.id}"
                         binding.appSetIdScope.text = if (appSetId.scope == AppSetId.SCOPE_APP) {
@@ -71,9 +76,9 @@ class MainActivity : AppCompatActivity() {
                             "<number-range-exceeded> scope = ${appSetId.scope}"
                         }
                         binding.appSetIdDescription.text = if (appSetId.scope == AppSetId.SCOPE_APP) {
-                            resources.getString(R.string.app_set_id_scope_app)
+                            HtmlCompat.fromHtml(resources.getString(R.string.app_set_id_scope_app), HtmlCompat.FROM_HTML_MODE_LEGACY)
                         } else if (appSetId.scope == AppSetId.SCOPE_DEVELOPER) {
-                            resources.getString(R.string.app_set_id_scope_dev)
+                            HtmlCompat.fromHtml(resources.getString(R.string.app_set_id_scope_dev), HtmlCompat.FROM_HTML_MODE_LEGACY)
                         } else {
                             "<number-range-exceeded>"
                         }

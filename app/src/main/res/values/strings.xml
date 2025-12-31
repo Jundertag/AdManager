@@ -4,10 +4,10 @@
     <string name="ad_id_limited_true">You aren\'t traceable via your AdId</string>
     <string name="ad_id_limited_false">You are traceable via your AdId</string>
     <string name="app_set_id_title">AppSetID:</string>
-    <string name="app_set_id_scope_dev">SCOPE_DEVELOPER means appSetId is scoped to the developer of the app and cannot identify a single user.</string>
-    <string name="app_set_id_scope_app">SCOPE_APP means appSetId is scoped to the app and can identify a single user.</string>
+    <string name="app_set_id_scope_dev"><tt>SCOPE_DEVELOPER</tt> means <tt>appSetId</tt> is scoped to the developer of the app and cannot identify a single user.</string>
+    <string name="app_set_id_scope_app"><tt>SCOPE_APP</tt> means <tt>appSetId</tt> is scoped to the app and can identify a single user.</string>
     <string name="app_set_id_unavailable">&lt;unavailable&gt;</string>
-    <string name="app_set_id_unusable">AppSetIdManager is unavailable and cannot be used for identification</string>
-    <string name="ad_id_unavailable"><![CDATA[<unavailable>]]></string>
-    <string name="measurement_api_description">"MeasurementManager is used for ad performance tracking, registerSource function is used to let the OS know something useful happened (viewing an ad, clicking on a button). registerTrigger is to let the OS know something actually happened (user installed app, clicked on link, etc.). Functions registerWebSource and registerWebTrigger are used for web contexts."</string>
+    <string name="app_set_id_unusable"><tt>AppSetIdManager</tt> is unavailable and cannot be used for identification</string>
+    <string name="ad_id_unavailable">&lt;unavailable&gt;</string>
+    <string name="measurement_api_description"><tt>MeasurementManager</tt> is used for ad performance tracking, <tt>registerSource</tt> function is used to let the OS know something useful happened (viewing an ad, clicking on a button). <tt>registerTrigger</tt> is to let the OS know something actually happened (user installed app, clicked on link, etc.). Functions <tt>registerWebSource</tt> and <tt>registerWebTrigger</tt> are used for web contexts.</string>
 </resources>
