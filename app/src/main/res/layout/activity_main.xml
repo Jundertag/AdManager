@@ -130,4 +130,16 @@
         app:layout_constraintTop_toBottomOf="@id/measurement_api_status"
         app:layout_constraintStart_toStartOf="parent"/>
 
+    <TextView
+        android:id="@+id/topics_manager_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/text_padding_horizontal"
+        android:text="TopicsManager:"
+        android:textSize="@dimen/text_bold_size"
+        android:textStyle="bold"
+        android:textColor="?attr/colorOnSurfaceVariant"
+        app:layout_constraintTop_toBottomOf="@id/measurement_api_description"
+        app:layout_constraintStart_toStartOf="parent"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
