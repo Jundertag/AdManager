@@ -45,16 +45,16 @@ class MainActivity : AppCompatActivity() {
                 viewModel.refreshAdId()
                 viewModel.adId.collect { adId ->
                     if (adId == null) {
-                        //binding.adValue.text = resources.getString(R.string.ad_id_unavailable)
-                        binding.adValue.text = HtmlCompat.fromHtml(resources.getString(R.string.ad_id_unavailable), HtmlCompat.FROM_HTML_MODE_LEGACY)
-                        binding.adLimitedTrackingValue.text = HtmlCompat.fromHtml(resources.getString(R.string.ad_id_unavailable), HtmlCompat.FROM_HTML_MODE_LEGACY)
+                        //binding.adValue.text = resources.getText(R.string.ad_id_unavailable)
+                        binding.adValue.text = resources.getText(R.string.ad_id_unavailable)
+                        binding.adLimitedTrackingValue.text = resources.getText(R.string.ad_id_unavailable)
                     } else {
-                        binding.adValue.text = HtmlCompat.fromHtml("<tt>adId: ${adId.adId}</tt>", HtmlCompat.FROM_HTML_MODE_LEGACY)
-                        binding.adLimitedTrackingValue.text = HtmlCompat.fromHtml("<tt>isLimitedAdTrackingEnabled: ${adId.isLimitAdTrackingEnabled}</tt>", HtmlCompat.FROM_HTML_MODE_LEGACY)
+                        binding.adValue.text = "<tt>adId: ${adId.adId}</tt>"
+                        binding.adLimitedTrackingValue.text = "<tt>isLimitedAdTrackingEnabled: ${adId.isLimitAdTrackingEnabled}</tt>"
                         binding.adDescription.text = if (adId.isLimitAdTrackingEnabled) {
-                            HtmlCompat.fromHtml(resources.getString(R.string.ad_id_limited_true), HtmlCompat.FROM_HTML_MODE_LEGACY)
+                            resources.getText(R.string.ad_id_limited_true)
                         } else {
-                            HtmlCompat.fromHtml(resources.getString(R.string.ad_id_limited_false), HtmlCompat.FROM_HTML_MODE_LEGACY)
+                            resources.getText(R.string.ad_id_limited_false)
                         }
                     }
                 }
@@ -66,28 +66,20 @@ class MainActivity : AppCompatActivity() {
                 viewModel.refreshAppId()
                 viewModel.appSetId.collect { appSetId ->
                     if (appSetId == null) {
-                        binding.appSetIdValue.text = HtmlCompat.fromHtml(resources.getString(R.string.app_set_id_unavailable), HtmlCompat.FROM_HTML_MODE_LEGACY)
-                        binding.appSetIdScope.text = HtmlCompat.fromHtml(resources.getString(R.string.app_set_id_unavailable), HtmlCompat.FROM_HTML_MODE_LEGACY)
-                        binding.appSetIdDescription.text = HtmlCompat.fromHtml(resources.getString(R.string.app_set_id_unusable), HtmlCompat.FROM_HTML_MODE_LEGACY)
+                        binding.appSetIdValue.text = resources.getText(R.string.app_set_id_unavailable)
+                        binding.appSetIdScope.text = resources.getText(R.string.app_set_id_unavailable)
+                        binding.appSetIdDescription.text = resources.getText(R.string.app_set_id_unusable)
                     } else {
-                        binding.appSetIdValue.text = HtmlCompat.fromHtml(resources.getString(R.string.app_set_id_value, appSetId.id), HtmlCompat.FROM_HTML_MODE_LEGACY)
+                        binding.appSetIdValue.text = resources.getText(R.string.app_set_id_value, appSetId.id)
                         binding.appSetIdScope.text = if (appSetId.scope == AppSetId.SCOPE_APP) {
-                            HtmlCompat.fromHtml(resources.getString(R.string.app_set_id_scope_app), HtmlCompat.FROM_HTML_MODE_LEGACY)
-                        } else if (appSetId.scope == AppSetId.SCOPE_DEVELOPER) {
-                            HtmlCompat.fromHtml(resources.getString(R.string.app_set_id_scope_dev), HtmlCompat.FROM_HTML_MODE_LEGACY)
-                        } else {
-                            HtmlCompat.fromHtml(resources.getString(R.string.app_set_id_scope_value, appSetId.scope), HtmlCompat.FROM_HTML_MODE_LEGACY)
+                            resources.getText(R.string.app_set_id_scope_app)
+                        } else { // assumed SCOPE_DEVELOPER
+                            resources.getText(R.string.app_set_id_scope_dev)
                         }
                         binding.appSetIdDescription.text = if (appSetId.scope == AppSetId.SCOPE_APP) {
-                            HtmlCompat.fromHtml(
-                                resources.getString(R.string.app_set_id_scope_app_desc),
-                                HtmlCompat.FROM_HTML_MODE_LEGACY
-                            )
+                            resources.getText(R.string.app_set_id_scope_app_desc)
                         } else { // assumed SCOPE_DEVELOPER
-                            HtmlCompat.fromHtml(
-                                resources.getString(R.string.app_set_id_scope_dev_desc),
-                                HtmlCompat.FROM_HTML_MODE_LEGACY
-                            )
+                            resources.getText(R.string.app_set_id_scope_dev_desc)
                         }
                     }
                 }
