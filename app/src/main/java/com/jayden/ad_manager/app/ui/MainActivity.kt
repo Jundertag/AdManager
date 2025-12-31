@@ -124,6 +124,11 @@ class MainActivity : AppCompatActivity() {
                         false -> resources.getText(R.string.measurement_api_status_disabled)
                         null -> resources.getText(R.string.unavailable)
                     }
+                    binding.measurementApiDescription.text = when (status) {
+                        true -> resources.getText(R.string.measurement_api_status_enabled_desc)
+                        false -> resources.getText(R.string.measurement_api_status_disabled_desc)
+                        null -> ""
+                    }
                 }
             }
         }
