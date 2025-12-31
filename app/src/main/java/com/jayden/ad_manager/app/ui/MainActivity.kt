@@ -5,12 +5,15 @@ import android.annotation.SuppressLint
 import android.content.res.Configuration
 import android.os.Bundle
 import android.text.Html.fromHtml
+import android.text.SpannableStringBuilder
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.HtmlCompat
+import androidx.core.text.toSpannable
+import androidx.core.text.toSpanned
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -46,8 +49,8 @@ class MainActivity : AppCompatActivity() {
                         binding.adValue.text = HtmlCompat.fromHtml(resources.getString(R.string.ad_id_unavailable), HtmlCompat.FROM_HTML_MODE_LEGACY)
                         binding.adLimitedTrackingValue.text = HtmlCompat.fromHtml(resources.getString(R.string.ad_id_unavailable), HtmlCompat.FROM_HTML_MODE_LEGACY)
                     } else {
-                        binding.adValue.text = "adId: ${adId.adId}"
-                        binding.adLimitedTrackingValue.text = "isLimitedAdTrackingEnabled: ${adId.isLimitAdTrackingEnabled}"
+                        binding.adValue.text = HtmlCompat.fromHtml("<tt>adId: ${adId.adId}</tt>", HtmlCompat.FROM_HTML_MODE_LEGACY)
+                        binding.adLimitedTrackingValue.text = HtmlCompat.fromHtml("<tt>isLimitedAdTrackingEnabled: ${adId.isLimitAdTrackingEnabled}</tt>", HtmlCompat.FROM_HTML_MODE_LEGACY)
                         binding.adDescription.text = if (adId.isLimitAdTrackingEnabled) {
                             HtmlCompat.fromHtml(resources.getString(R.string.ad_id_limited_true), HtmlCompat.FROM_HTML_MODE_LEGACY)
                         } else {
@@ -67,20 +70,24 @@ class MainActivity : AppCompatActivity() {
                         binding.appSetIdScope.text = HtmlCompat.fromHtml(resources.getString(R.string.app_set_id_unavailable), HtmlCompat.FROM_HTML_MODE_LEGACY)
                         binding.appSetIdDescription.text = HtmlCompat.fromHtml(resources.getString(R.string.app_set_id_unusable), HtmlCompat.FROM_HTML_MODE_LEGACY)
                     } else {
-                        binding.appSetIdValue.text = "id: ${appSetId.id}"
+                        binding.appSetIdValue.text = HtmlCompat.fromHtml(resources.getString(R.string.app_set_id_value, appSetId.id), HtmlCompat.FROM_HTML_MODE_LEGACY)
                         binding.appSetIdScope.text = if (appSetId.scope == AppSetId.SCOPE_APP) {
-                            "scope: SCOPE_APP = ${appSetId.scope}"
-                        } else if (appSetId.scope == AppSetId.SCOPE_DEVELOPER) {
-                            "scope: SCOPE_DEVELOPER = ${appSetId.scope}"
-                        } else {
-                            "<number-range-exceeded> scope = ${appSetId.scope}"
-                        }
-                        binding.appSetIdDescription.text = if (appSetId.scope == AppSetId.SCOPE_APP) {
                             HtmlCompat.fromHtml(resources.getString(R.string.app_set_id_scope_app), HtmlCompat.FROM_HTML_MODE_LEGACY)
                         } else if (appSetId.scope == AppSetId.SCOPE_DEVELOPER) {
                             HtmlCompat.fromHtml(resources.getString(R.string.app_set_id_scope_dev), HtmlCompat.FROM_HTML_MODE_LEGACY)
                         } else {
-                            "<number-range-exceeded>"
+                            HtmlCompat.fromHtml(resources.getString(R.string.app_set_id_scope_value, appSetId.scope), HtmlCompat.FROM_HTML_MODE_LEGACY)
+                        }
+                        binding.appSetIdDescription.text = if (appSetId.scope == AppSetId.SCOPE_APP) {
+                            HtmlCompat.fromHtml(
+                                resources.getString(R.string.app_set_id_scope_app_desc),
+                                HtmlCompat.FROM_HTML_MODE_LEGACY
+                            )
+                        } else { // assumed SCOPE_DEVELOPER
+                            HtmlCompat.fromHtml(
+                                resources.getString(R.string.app_set_id_scope_dev_desc),
+                                HtmlCompat.FROM_HTML_MODE_LEGACY
+                            )
                         }
                     }
                 }
